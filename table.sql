@@ -4,5 +4,5 @@ CREATE TABLE tokens (
 
 CREATE TABLE links (
     name TEXT PRIMARY KEY,
-    url TEXT NOT NULL
+    link TEXT NOT NULL
 );
