@@ -62,9 +62,9 @@
         $query->execute();
     }
 
-    $query = $db->prepare('INSERT INTO links (name, url) VALUES (:name, :url)');
+    $query = $db->prepare('INSERT INTO links (name, link) VALUES (:name, :url)');
     $query->bindValue(':name', $name);
-    $query->bindValue(':url', $url);
+    $query->bindValue(':link', $url);
     $query->execute();
     
     echo 'Link created. <br>';
