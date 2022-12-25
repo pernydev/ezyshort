@@ -26,7 +26,7 @@
 
 <?php
     if (!extension_loaded('sqlite3')) {
-        dl('sqlite3.' . PHP_SHLIB_SUFFIX);
+        echo "SQLite3 extension not loaded. Please enable it before continuing. We would do this for you, but dl() is deprecated.";
     }
 
     $db = new SQLite3('database.db');
