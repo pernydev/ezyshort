@@ -31,10 +31,36 @@
 
     if (!file_exists('database.db')) {
         touch('database.db');
+    } else {
+        echo 'Database already exists. Please delete database.db before continuing. This is a security measure.';
+        return;
     }
+
+    $query_string = $_SERVER['QUERY_STRING'];
+    parse_str($query_string, $query_params);
+
+    if (!isset($query_params['token'])) {
+        echo '
+        <h1>Setup</h1>
+        <h2>Welcome to EzyShort! The setup is a bit too easy! Just enter a token to this ugly installer and you\'re good to go!</h2>
+        <form action="setup.php" method="get">
+            <input type="text" name="token" placeholder="Token">
+            <button type="submit">Set token</button>
+        </form>
+        ';
+        return;
+    }
+    $token = $query_params['token'];
 
     $db = new SQLite3('database.db');
     $sql = file_get_contents('table.sql');
     $db->exec($sql);
-    echo "Tables created successfully. Please delete this file before continuing.";
+
+    // insert token
+    $query = $db->prepare('INSERT INTO tokens (token) VALUES (:token)');
+    $query->bindValue(':token', $token);
+    $query->execute();
+
+    echo 'Setup complete. Please delete setup.php.';
 ?>
+
