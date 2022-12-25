@@ -27,7 +27,7 @@
         echo 'Please delete setup.php before continuing. The file can be used to wipe the database.';
         return;
     }
-    
+
     $db = new SQLite3('database.db');
 
     $query_string = $_SERVER['QUERY_STRING'];
@@ -67,4 +67,5 @@
     $query->bindValue(':url', $url);
     $query->execute();
     
-    echo 'Link created.';
+    echo 'Link created. <br>';
+    echo $_SERVER['HTTP_HOST'] . '/?l=' . $name;
