@@ -23,6 +23,11 @@
 -->
 
 <?php
+    if (file_exists('setup.php')) {
+        echo 'Please delete setup.php before continuing. The file can be used to wipe the database.';
+        return;
+    }
+    
     $db = new SQLite3('database.db');
 
     $query_string = $_SERVER['QUERY_STRING'];
