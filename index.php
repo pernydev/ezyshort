@@ -29,13 +29,13 @@
     parse_str($query_string, $query_params);
     
     if (isset($query_params['l'])) {
-        $link = $query_params['l'];
-        $query = $db->prepare('SELECT * FROM links WHERE link = :link');
-        $query->bindValue(':link', $link);
+        $name = $query_params['l'];
+        $query = $db->prepare('SELECT url FROM links WHERE name = :name');
+        $query->bindValue(':name', $name);
         $result = $query->execute();
         $row = $result->fetchArray();
         if ($row) {
-            header('Location: ' . $row['url']);
+            header('Location: ' . $row['link']);
         } else {
             echo 'Link not found.';
         }
