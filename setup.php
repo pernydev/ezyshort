@@ -25,6 +25,10 @@
 -->
 
 <?php
+    if (!extension_loaded('sqlite3')) {
+        dl('sqlite3.' . PHP_SHLIB_SUFFIX);
+    }
+
     $db = new SQLite3('database.db');
     $sql = file_get_contents('table.sql');
     $db->exec($sql);
