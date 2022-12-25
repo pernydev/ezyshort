@@ -29,6 +29,10 @@
         echo "SQLite3 extension not loaded. Please enable it before continuing. We would do this for you, but dl() is deprecated.";
     }
 
+    if (!file_exists('database.db')) {
+        touch('database.db');
+    }
+
     $db = new SQLite3('database.db');
     $sql = file_get_contents('table.sql');
     $db->exec($sql);
