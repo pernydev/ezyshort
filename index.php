@@ -27,7 +27,7 @@
         echo 'Please delete setup.php before continuing. The file can be used to wipe the database.';
         return;
     }
-    
+
     $db = new SQLite3('database.db');
 
     $query_string = $_SERVER['QUERY_STRING'];
@@ -35,7 +35,7 @@
     
     if (isset($query_params['l'])) {
         $name = $query_params['l'];
-        $query = $db->prepare('SELECT url FROM links WHERE name = :name');
+        $query = $db->prepare('SELECT link FROM links WHERE name = :name');
         $query->bindValue(':name', $name);
         $result = $query->execute();
         $row = $result->fetchArray();
